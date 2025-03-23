@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture - Simple Robot Agent</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .nav a {
+            padding: 10px 15px;
+            color: #2c3e50;
+        }
+        .nav a:hover {
+            background-color: #e9ecef;
+            border-radius: 3px;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: Monaco, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .architecture-diagram {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Architecture</h1>
+        <p>Simple Robot Agent Documentation</p>
+    </header>
+
+    <div class="nav">
+        <a href="../index.html">Home</a>
+        <a href="getting-started.html">Getting Started</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="sensors.html">Sensors</a>
+        <a href="actuators.html">Actuators</a>
+        <a href="extending.html">Extending</a>
+        <a href="https://github.com/enkhbold470/simple-robot-agent">GitHub</a>
+    </div>
+
+    <div class="card">
+        <h2>System Architecture Overview</h2>
+        <p>The Simple Robot Agent uses a modular, component-based architecture with clear separation of concerns. This design makes it easy to extend and customize for various robot designs and applications.</p>
+        
+        <h3>High-Level Architecture</h3>
+        <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 5px; margin: 20px 0;">
+            <pre style="display: inline-block; text-align: left;">
++------------------+
+|   RobotAgent     |
++------------------+
+        |
+        |
++-------v---------+
+|                 |
+| +-------------+ |
+| |   Sensors   | |
+| +-------------+ |
+|                 |
+| +-------------+ |
+| |  Actuators  | |
+| +-------------+ |
+|                 |
+| +-------------+ |
+| | Task Queue  | |
+| +-------------+ |
+|                 |
+| +-------------+ |
+| | Positioning | |
+| +-------------+ |
+|                 |
++------------------+
+        |
+        |
++-------v----------+
+| Hardware Interface|
++------------------+</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Core Components</h2>
+        
+        <h3>RobotAgent Class</h3>
+        <p>The central class that manages all robot functionality and coordinates between components.</p>
+        <ul>
+            <li>Maintains state (position, orientation)</li>
+            <li>Manages sensor and actuator registry</li>
+            <li>Handles task queue and execution</li>
+            <li>Provides movement and positioning capabilities</li>
+        </ul>
+        
+        <h3>Sensors System</h3>
+        <p>Handles all sensor-related functionality:</p>
+        <ul>
+            <li>Sensor registration and configuration</li>
+            <li>Sensor data acquisition</li>
+            <li>Sensor types are extensible</li>
+        </ul>
+        
+        <h3>Actuators System</h3>
+        <p>Manages all actuator-related functionality:</p>
+        <ul>
+            <li>Actuator registration and configuration</li>
+            <li>State management and control</li>
+            <li>Supports various actuator types</li>
+        </ul>
+        
+        <h3>Task Queue</h3>
+        <p>Manages the sequential execution of robot tasks:</p>
+        <ul>
+            <li>FIFO (First In, First Out) task queue</li>
+            <li>Task execution coordination</li>
+            <li>State tracking during task execution</li>
+        </ul>
+        
+        <h3>Positioning System</h3>
+        <p>Tracks and updates the robot's position and orientation:</p>
+        <ul>
+            <li>2D position tracking (x, y coordinates)</li>
+            <li>Orientation tracking (in degrees)</li>
+            <li>Movement calculations based on orientation</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Control Flow</h2>
+        <p>The typical control flow in the Simple Robot Agent is as follows:</p>
+        
+        <ol>
+            <li><strong>Initialization:</strong> Robot agent is created with a name and default state</li>
+            <li><strong>Component Setup:</strong> Sensors and actuators are added and configured</li>
+            <li><strong>Task Definition:</strong> Tasks are added to the task queue</li>
+            <li><strong>Execution:</strong> The run method executes tasks in sequence until the queue is empty</li>
+            <li><strong>Clean-up:</strong> Resources are released when the robot is shut down</li>
+        </ol>
+        
+        <h3>Task Execution Loop</h3>
+        <pre><code>def run(self):
+    """Run the robot's main control loop"""
+    print(f"Robot '{self.name}' starting...")
+    try:
+        while self.tasks:
+            self.execute_next_task()
+        print("All tasks completed.")
+    except KeyboardInterrupt:
+        print("\nRobot operation interrupted.")
+    finally:
+        print(f"Robot '{self.name}' shutting down.")</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Extensibility</h2>
+        <p>The architecture is designed to be easily extensible in several ways:</p>
+        
+        <h3>Adding New Sensor Types</h3>
+        <p>The sensor system uses a simple type-based registry that can be extended to support new sensor types.</p>
+        
+        <h3>Adding New Actuator Types</h3>
+        <p>The actuator system similarly supports adding new types of actuators with custom behaviors.</p>
+        
+        <h3>Custom Task Handlers</h3>
+        <p>The task execution system can be extended to handle custom task types and complex behaviors.</p>
+        
+        <h3>Advanced Positioning</h3>
+        <p>The positioning system can be enhanced to support 3D positioning, advanced mapping, and localization algorithms.</p>
+    </div>
+
+    <footer>
+        <p>Simple Robot Agent Documentation - <a href="https://github.com/enkhbold470/simple-robot-agent">View on GitHub</a></p>
+    </footer>
+</body>
+</html>
