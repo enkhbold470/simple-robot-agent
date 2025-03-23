@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Simple Robot Agent</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .nav a {
+            padding: 10px 15px;
+            color: #2c3e50;
+        }
+        .nav a:hover {
+            background-color: #e9ecef;
+            border-radius: 3px;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: Monaco, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Getting Started</h1>
+        <p>Simple Robot Agent Documentation</p>
+    </header>
+
+    <div class="nav">
+        <a href="../index.html">Home</a>
+        <a href="getting-started.html">Getting Started</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="sensors.html">Sensors</a>
+        <a href="actuators.html">Actuators</a>
+        <a href="extending.html">Extending</a>
+        <a href="https://github.com/enkhbold470/simple-robot-agent">GitHub</a>
+    </div>
+
+    <div class="card">
+        <h2>Installation</h2>
+        <p>To get started with the Simple Robot Agent, follow these steps:</p>
+        
+        <h3>1. Clone the Repository</h3>
+        <pre><code>git clone https://github.com/enkhbold470/simple-robot-agent.git
+cd simple-robot-agent</code></pre>
+        
+        <h3>2. Install Requirements</h3>
+        <pre><code>pip install -r requirements.txt</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Basic Usage</h2>
+        <p>Here's a simple example to create and run a robot:</p>
+        
+        <pre><code>from robot_agent import RobotAgent
+
+# Initialize robot
+robot = RobotAgent("MyRobot")
+
+# Add sensors
+robot.add_sensor("distance", "ultrasonic", {"max_range": 400})
+robot.add_sensor("temperature", "thermometer")
+
+# Add actuators
+robot.add_actuator("left_motor", "dc_motor", {"max_speed": 100})
+robot.add_actuator("right_motor", "dc_motor", {"max_speed": 100})
+
+# Add tasks
+robot.add_task("move_forward_10")
+robot.add_task("turn_right_90")
+robot.add_task("read_sensors")
+
+# Run the robot
+robot.run()</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Understanding the RobotAgent Class</h2>
+        <p>The <code>RobotAgent</code> class is the core of the project. Here are the main methods you'll use:</p>
+        
+        <h3>Initialization</h3>
+        <pre><code>robot = RobotAgent(name="SimpleBot")</code></pre>
+        <p>Creates a new robot agent with the given name.</p>
+        
+        <h3>Adding Sensors</h3>
+        <pre><code>robot.add_sensor(name, sensor_type, config=None)</code></pre>
+        <p>Adds a sensor to the robot with a name, type, and optional configuration.</p>
+        
+        <h3>Adding Actuators</h3>
+        <pre><code>robot.add_actuator(name, actuator_type, config=None)</code></pre>
+        <p>Adds an actuator to the robot with a name, type, and optional configuration.</p>
+        
+        <h3>Reading Sensors</h3>
+        <pre><code>value = robot.read_sensor(name)</code></pre>
+        <p>Reads and returns data from the specified sensor.</p>
+        
+        <h3>Controlling Actuators</h3>
+        <pre><code>robot.set_actuator(name, state)</code></pre>
+        <p>Sets the state of the specified actuator.</p>
+        
+        <h3>Movement</h3>
+        <pre><code>robot.move(distance)
+robot.rotate(angle)</code></pre>
+        <p>Moves the robot forward by a distance or rotates by an angle (in degrees).</p>
+        
+        <h3>Tasks</h3>
+        <pre><code>robot.add_task(task)
+robot.execute_next_task()
+robot.run()</code></pre>
+        <p>Add tasks to the queue, execute the next task, or run all tasks in the queue.</p>
+    </div>
+
+    <div class="card">
+        <h2>Next Steps</h2>
+        <p>Now that you understand the basics, you can:</p>
+        <ul>
+            <li>Learn about the <a href="architecture.html">architecture</a> of the robot agent</li>
+            <li>Explore available <a href="sensors.html">sensors</a> and <a href="actuators.html">actuators</a></li>
+            <li>Learn how to <a href="extending.html">extend</a> the robot with custom components</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Simple Robot Agent Documentation - <a href="https://github.com/enkhbold470/simple-robot-agent">View on GitHub</a></p>
+    </footer>
+</body>
+</html>
